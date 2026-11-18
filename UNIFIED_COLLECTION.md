@@ -4,7 +4,7 @@
 >
 > Nothing below was built, and nothing below should be built. The user considered an in-process
 > collector for this package's own counters twice and rejected it both times, along with the
-> republishing of `Optimizely.Performance.DotNetCounters`' counters that it depends on. The
+> republishing of `Reignite.Optimizely.DotNetCounters`' counters that it depends on. The
 > shipped design is the opposite one: publish to the `Optimizely-Performance` EventSource and
 > leave collection to whatever the host already runs. See [README.md](README.md) for what the
 > product actually does, and [TELEMETRY_ARCHITECTURE.md](TELEMETRY_ARCHITECTURE.md) for why.
@@ -18,7 +18,7 @@
 ## Problem Statement
 
 **Before**: Two separate collection systems:
-1. `Optimizely.Performance.DotNetCounters` collects **System.Runtime** counters
+1. `Reignite.Optimizely.DotNetCounters` collects **System.Runtime** counters
 2. Our `Optimizely-Performance` EventSource publishes custom counters
 3. They don't know about each other - Application Insights sees them as separate
 
@@ -316,7 +316,7 @@ foreach (var (name, value) in allMetrics)
 
 ---
 
-## Relationship to Optimizely.Performance.DotNetCounters
+## Relationship to Reignite.Optimizely.DotNetCounters
 
 ### Before This Change
 

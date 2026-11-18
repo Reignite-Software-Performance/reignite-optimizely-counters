@@ -17,7 +17,7 @@
     <IsPackable>false</IsPackable>
     <!-- This is a consumer, so it should see exactly what a consumer sees, warnings included. -->
     <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
-    <RootNamespace>Optimizely.Performance.Counters.Examples.VerifyPackageInstall</RootNamespace>
+    <RootNamespace>Reignite.Optimizely.Counters.Examples.VerifyPackageInstall</RootNamespace>
   </PropertyGroup>
 
   <!--
@@ -26,8 +26,8 @@
     lib/ layout and the assembly binding that a consumer actually gets.
   -->
   <ItemGroup>
-    <PackageReference Include="Optimizely.Performance.Counters.CMS" Version="1.0.0" />
-    <PackageReference Include="Optimizely.Performance.Counters.Commerce" Version="1.0.0" />
+    <PackageReference Include="Reignite.Optimizely.Counters.CMS" Version="1.0.0" />
+    <PackageReference Include="Reignite.Optimizely.Counters.Commerce" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

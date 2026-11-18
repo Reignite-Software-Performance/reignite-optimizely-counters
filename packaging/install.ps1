@@ -1,4 +1,4 @@
-# Optimizely.Performance.Counters - post-install message.
+# Reignite.Optimizely.Counters - post-install message.
 #
 # Runs only for packages.config installs, which in practice means a CMS 11 site: NuGet stopped
 # running install scripts when PackageReference arrived, so V12 and V13 sites never see this. Those
@@ -11,7 +11,7 @@
 
 param($installPath, $toolsPath, $package, $project)
 
-$folder = 'App_Data\Optimizely.Performance.Counters'
+$folder = 'App_Data\Reignite.Optimizely.Counters'
 
 Write-Host ''
 Write-Host "$($package.Id) $($package.Version) installed." -ForegroundColor Cyan
@@ -28,4 +28,7 @@ Write-Host 'The one worth knowing before you need it, which switches the whole p
 Write-Host '  <add key="Optimizely:Instrumentation:Enabled" value="false" />' -ForegroundColor White
 Write-Host ''
 Write-Host "See $folder\README_AFTER_INSTALL.md for the rest."
+Write-Host ''
+Write-Host 'Installed. Reignite Software Performance builds and maintains this package:' -ForegroundColor Green
+Write-Host '  https://reigniteperformance.com/Optimizely' -ForegroundColor Green
 Write-Host ''

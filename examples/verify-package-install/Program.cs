@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.Linq;
-using Optimizely.Performance.Counters.Core.Telemetry;
-using Optimizely.Performance.Counters.VersionDetection;
+using Reignite.Optimizely.Counters.Core.Telemetry;
+using Reignite.Optimizely.Counters.VersionDetection;
 
-namespace Optimizely.Performance.Counters.Examples.VerifyPackageInstall
+namespace Reignite.Optimizely.Counters.Examples.VerifyPackageInstall
 {
     /// <summary>
     /// Checks that everything a host depends on at startup is actually reachable from the installed
@@ -136,14 +136,14 @@ namespace Optimizely.Performance.Counters.Examples.VerifyPackageInstall
         private static void CheckTheDecoratorsAreReachable(ICollection<string> failures)
         {
             LoadModule(
-                "Optimizely.Performance.Counters.CMS.Initialization.CMSPerformanceCountersModule, " +
-                "Optimizely.Performance.Counters.CMS",
+                "Reignite.Optimizely.Counters.CMS.Initialization.CMSPerformanceCountersModule, " +
+                "Reignite.Optimizely.Counters.CMS",
                 "CMS module",
                 failures);
 
             LoadModule(
-                "Optimizely.Performance.Counters.Commerce.Initialization.CommercePerformanceCountersModule, " +
-                "Optimizely.Performance.Counters.Commerce",
+                "Reignite.Optimizely.Counters.Commerce.Initialization.CommercePerformanceCountersModule, " +
+                "Reignite.Optimizely.Counters.Commerce",
                 "Commerce module",
                 failures);
         }

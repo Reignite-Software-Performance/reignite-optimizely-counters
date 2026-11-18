@@ -18,11 +18,11 @@ There is nothing to write. Both packages ship an `[InitializableModule]` that Op
 on its own, and all the registration happens in `ConfigureContainer` before any module initializes.
 
 ```
-dotnet add package Optimizely.Performance.Counters.CMS
-dotnet add package Optimizely.Performance.Counters.Commerce   # only if the site is a Commerce site
+dotnet add package Reignite.Optimizely.Counters.CMS
+dotnet add package Reignite.Optimizely.Counters.Commerce   # only if the site is a Commerce site
 ```
 
-`Optimizely.Performance.Counters.Core` and `Optimizely.Performance.DotNetCounters` come along
+`Reignite.Optimizely.Counters.Core` and `Reignite.Optimizely.DotNetCounters` come along
 transitively; the two never ship apart.
 
 ## Running against a local build

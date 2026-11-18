@@ -2,18 +2,18 @@ using System;
 using EPiServer.Framework.Initialization;
 using EPiServer.ServiceLocation;
 using Microsoft.Extensions.Logging;
-using Optimizely.Performance.Counters.Core.Configuration;
-using Optimizely.Performance.Counters.Core.Deployment;
-using Optimizely.Performance.Counters.Core.Diagnostics;
-using Optimizely.Performance.Counters.Core.Http;
-using Optimizely.Performance.Counters.Core.Telemetry;
-using Optimizely.Performance.Counters.VersionDetection;
+using Reignite.Optimizely.Counters.Core.Configuration;
+using Reignite.Optimizely.Counters.Core.Deployment;
+using Reignite.Optimizely.Counters.Core.Diagnostics;
+using Reignite.Optimizely.Counters.Core.Http;
+using Reignite.Optimizely.Counters.Core.Telemetry;
+using Reignite.Optimizely.Counters.VersionDetection;
 #if !CMS11
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 #endif
 
-namespace Optimizely.Performance.Counters.Shared
+namespace Reignite.Optimizely.Counters.Shared
 {
     /// <summary>
     /// The parts of an initialization module that differ by Optimizely major rather than by

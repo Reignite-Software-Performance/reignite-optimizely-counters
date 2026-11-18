@@ -1,0 +1,10 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Reignite.Optimizely.Counters.CMS/Reignite.Optimizely.Counters.CMS.csproj" />
+    <Project Path="src/Reignite.Optimizely.Counters.Commerce/Reignite.Optimizely.Counters.Commerce.csproj" />
+    <Project Path="src/Reignite.Optimizely.Counters.Core/Reignite.Optimizely.Counters.Core.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Reignite.Optimizely.Counters.Tests/Reignite.Optimizely.Counters.Tests.csproj" />
+  </Folder>
+</Solution>

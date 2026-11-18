@@ -1,6 +1,6 @@
 {
   "_comment": [
-    "Optimizely.Performance.Counters - settings template for CMS 12 and CMS 13.",
+    "Reignite.Optimizely.Counters - settings template for CMS 12 and CMS 13.",
     "",
     "Merge the 'Optimizely' block below into your site's appsettings.json. Every value shown is",
     "the default, so a site that copies this file wholesale behaves exactly as it does with no",
@@ -10,7 +10,7 @@
     "does not recognise is logged as a warning at startup, so a typo is visible rather than silent.",
     "",
     "This is a different section from Optimizely:PerformanceCounters, which belongs to",
-    "Optimizely.Performance.DotNetCounters. The two packages are usually installed together and",
+    "Reignite.Optimizely.DotNetCounters. The two packages are usually installed together and",
     "configured separately."
   ],
 

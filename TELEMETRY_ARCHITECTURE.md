@@ -398,11 +398,11 @@ Application Insights parses this and creates proper dimensions.
 ✅ **Works with V11 (.NET Framework), V12 (.NET 6), V13 (.NET 8+)**  
 ✅ **Minimal overhead** (~150ns per metric)  
 ✅ **Transparent detection** - logs what's available on startup  
-✅ **Same pattern** as Optimizely.Performance.DotNetCounters
+✅ **Same pattern** as Reignite.Optimizely.DotNetCounters
 
 **Installation**:
 ```bash
-dotnet add package Optimizely.Performance.Counters.CMS
+dotnet add package Reignite.Optimizely.Counters.CMS
 # Metrics automatically flow to Application Insights if installed
 # Or DataDog if installed
 # Or available via dotnet-counters for development

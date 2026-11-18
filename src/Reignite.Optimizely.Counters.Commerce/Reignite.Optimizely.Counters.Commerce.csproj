@@ -1,0 +1,70 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net472;net6.0;net7.0;net8.0;net9.0;net10.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageId>Reignite.Optimizely.Counters.Commerce</PackageId>
+    <Description>Performance counters for Optimizely Commerce V11, V12, and V13 - Orders, Pricing, Inventory, Promotions</Description>
+  </PropertyGroup>
+
+  <!-- Define compilation symbols -->
+  <PropertyGroup>
+    <DefineConstants Condition="'$(TargetFramework)' == 'net472'">$(DefineConstants);CMS11;COMMERCE13</DefineConstants>
+    <DefineConstants Condition="'$(TargetFramework)' == 'net6.0' Or '$(TargetFramework)' == 'net7.0' Or '$(TargetFramework)' == 'net8.0' Or '$(TargetFramework)' == 'net9.0'">$(DefineConstants);CMS12;COMMERCE14</DefineConstants>
+    <DefineConstants Condition="'$(TargetFramework)' == 'net10.0'">$(DefineConstants);CMS13;COMMERCE15</DefineConstants>
+  </PropertyGroup>
+
+  <!-- Project references -->
+  <ItemGroup>
+    <ProjectReference Include="..\Reignite.Optimizely.Counters.Core\Reignite.Optimizely.Counters.Core.csproj" />
+    <!-- Core includes Reignite.Optimizely.DotNetCounters as transitive dependency -->
+  </ItemGroup>
+
+  <!-- See the matching comment in the CMS project: shared initialization support, linked. -->
+  <ItemGroup>
+    <Compile Include="..\Shared\*.cs" LinkBase="Shared" />
+  </ItemGroup>
+
+  <!-- See the matching comment in the CMS project: the settings template and the target that
+       delivers it, packed under this package's own id. -->
+  <ItemGroup>
+    <None Include="..\..\packaging\Reignite.Optimizely.Counters.targets"
+          Pack="true" PackagePath="build\$(PackageId).targets" Visible="false" />
+    <None Include="..\..\packaging\install.ps1"
+          Pack="true" PackagePath="tools\install.ps1" Visible="false" />
+    <None Include="..\..\packaging\templates\*"
+          Pack="true" PackagePath="build\templates\" Visible="false" />
+    <None Include="..\..\packaging\templates\Optimizely.Instrumentation.template.config;..\..\packaging\templates\README_AFTER_INSTALL.md"
+          Pack="true" PackagePath="content\App_Data\Reignite.Optimizely.Counters\" Visible="false" />
+  </ItemGroup>
+
+  <!-- Common dependencies -->
+  <ItemGroup>
+    <!-- Logging version flows from Optimizely packages -->
+  </ItemGroup>
+
+  <!-- .NET Framework 4.7.2 (V11 / Commerce 13) -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net472'">
+    <PackageReference Include="EPiServer.Commerce.Core" Version="$(CommerceV13Version)" PrivateAssets="compile" />
+    <PackageReference Include="EPiServer.Framework" Version="$(OptimizelyV11Version)" PrivateAssets="compile" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+
+  <!-- .NET 6-9 (V12 / Commerce 14). One Commerce version across the band. It used to be split,
+       because Commerce 14.46 has no net6.0 or net7.0 assembly - but that is a ceiling, and these
+       are floors: 14.5.0 is the oldest Commerce 14 with a net6.0 assembly and it is equally valid
+       on net8.0 and net9.0. A site on net8.0 running 14.46 installs against this floor fine. -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net6.0' Or '$(TargetFramework)' == 'net7.0' Or '$(TargetFramework)' == 'net8.0' Or '$(TargetFramework)' == 'net9.0'">
+    <PackageReference Include="EPiServer.Commerce.Core" Version="$(CommerceV14Version)" PrivateAssets="compile" />
+    <PackageReference Include="EPiServer.Framework" Version="$(OptimizelyV12Version)" PrivateAssets="compile" />
+  </ItemGroup>
+
+  <!-- .NET 10+ (V13 / Commerce 15) -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'net10.0'">
+    <PackageReference Include="EPiServer.Commerce.Core" Version="$(CommerceV15Version)" PrivateAssets="compile" />
+    <PackageReference Include="EPiServer.Framework" Version="$(OptimizelyV13Version)" PrivateAssets="compile" />
+  </ItemGroup>
+
+</Project>

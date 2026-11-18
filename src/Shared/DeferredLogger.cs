@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 
-namespace Optimizely.Performance.Counters.Shared
+namespace Reignite.Optimizely.Counters.Shared
 {
     /// <summary>
     /// Buffers what an initialization module logs during <c>ConfigureContainer</c> and replays it

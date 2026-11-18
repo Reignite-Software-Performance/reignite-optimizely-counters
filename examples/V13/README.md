@@ -1,8 +1,8 @@
 # Optimizely CMS 13 (.NET 10)
 
 ```
-dotnet add package Optimizely.Performance.Counters.CMS
-dotnet add package Optimizely.Performance.Counters.Commerce   # Commerce 15 sites only
+dotnet add package Reignite.Optimizely.Counters.CMS
+dotnet add package Reignite.Optimizely.Counters.Commerce   # Commerce 15 sites only
 ```
 
 `CMSPerformanceCountersModule` is an `[InitializableModule]`, so Optimizely finds it without any

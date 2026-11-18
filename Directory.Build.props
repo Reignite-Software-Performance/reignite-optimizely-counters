@@ -2,18 +2,19 @@
 
   <!--
     Package metadata shared by all three packages. Kept here rather than repeated in each csproj so
-    the three cannot drift apart on a feed, and matched to Optimizely.Performance.DotNetCounters,
+    the three cannot drift apart on a feed, and matched to Reignite.Optimizely.DotNetCounters,
     which they always ship alongside.
   -->
   <PropertyGroup>
-    <Authors>Optimizely</Authors>
-    <Company>Optimizely</Company>
+    <Authors>Reignite Software Performance</Authors>
+    <Company>Reignite Software Performance</Company>
+    <Copyright>Copyright (c) Reignite Software Performance</Copyright>
     <Version>1.0.0</Version>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/optimizely</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/optimizely/performance-counters</RepositoryUrl>
+    <PackageProjectUrl>https://reigniteperformance.com/Optimizely</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Reignite-Software-Performance/Reignite.Optimizely.Counters</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>optimizely episerver performance counters monitoring application-insights telemetry</PackageTags>
+    <PackageTags>optimizely episerver performance counters monitoring application-insights telemetry reignite</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
@@ -79,7 +80,7 @@
     <CommerceV13Version>13.0.0</CommerceV13Version>
 
     <!-- V12: CMS 12 / Commerce 14, net6.0-net9.0.
-         12.10.0 is a hard floor and not our choice: Optimizely.Performance.DotNetCounters 1.0.0 -
+         12.10.0 is a hard floor and not our choice: Reignite.Optimizely.DotNetCounters 1.0.0 -
          the dependency these packages always ship beside - declares EPiServer.CMS.Core and
          EPiServer.Framework >= 12.10.0 in its net6.0 group, which every consumer inherits through
          Core. 12.5.0 restores as an NU1605 downgrade and 12.0.3 as an NU1107 conflict, but only

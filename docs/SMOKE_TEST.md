@@ -24,8 +24,8 @@ EventSource name      : Optimizely-Performance
 Compiled for          : V13
 Registered counters   : 71
 EventSource state     : healthy
-CMS module            : Optimizely.Performance.Counters.CMS loaded
-Commerce module       : Optimizely.Performance.Counters.Commerce loaded
+CMS module            : Reignite.Optimizely.Counters.CMS loaded
+Commerce module       : Reignite.Optimizely.Counters.Commerce loaded
 Detected at runtime   : V13
 
 PASS - the packages install and bind on this target framework.
@@ -37,9 +37,9 @@ net472, V12 on net6.0 through net9.0, and V13 on net10.0, and should always matc
 
 > **NU1608 on restore is expected.** Commerce names `EPiServer.CMS.Core` as a range and its sibling
 > `EPiServer.CMS.AspNetCore` pins that range's floor exactly, so on the V12 band NuGet settles
-> `AspNetCore` on 12.4.0 - which requires `CMS.Core (= 12.4.0)` - and then `Optimizely.Performance.
-> DotNetCounters` lifts `CMS.Core` to its own 12.10.0 minimum, past the pin. Four lines, two
-> distinct warnings reported once per restore pass.
+> `AspNetCore` on 12.4.0 - which requires `CMS.Core (= 12.4.0)` - and then
+> `Reignite.Optimizely.DotNetCounters` lifts `CMS.Core` to its own 12.10.0 minimum, past the pin.
+> Four lines, two distinct warnings reported once per restore pass.
 >
 > It does not appear on a real site, only on a project like this one that references nothing but
 > these packages: a site references `CMS.AspNetCore` itself, which lifts it to match. Removing it
@@ -57,7 +57,7 @@ default test run therefore proves the floor and says nothing about current Optim
 other end too:
 
 ```
-dotnet test tests/Optimizely.Performance.Counters.Tests \
+dotnet test tests/Reignite.Optimizely.Counters.Tests \
   -p:OptimizelyV11Version=11.21.5 \
   -p:OptimizelyV12Version=12.24.1 \
   -p:OptimizelyV13Version=13.1.1 \
@@ -70,7 +70,7 @@ Both ends must be green before a release. 14.45.5 rather than 14.46.0 because 14
 or net7.0 assembly and one property covers the whole V12 band. To cover 14.46 as well:
 
 ```
-dotnet test tests/Optimizely.Performance.Counters.Tests \
+dotnet test tests/Reignite.Optimizely.Counters.Tests \
   -p:TargetFrameworks=net8.0 -p:OptimizelyV12Version=12.24.1 -p:CommerceV14Version=14.46.0
 ```
 

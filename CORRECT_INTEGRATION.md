@@ -8,7 +8,7 @@ Application Insights **already has an EventListener** (`EventCounterCollectionMo
 > existence of an `EventListener` in the product. Collecting the counters this package publishes
 > is the host's job and we do not do it. Listening to *someone else's* EventSource to gather
 > source data is a different thing and is allowed:
-> [`ContentionProbe.ContentionBurstListener`](src/Optimizely.Performance.Counters.Core/Diagnostics/ContentionProbe.cs)
+> [`ContentionProbe.ContentionBurstListener`](src/Reignite.Optimizely.Counters.Core/Diagnostics/ContentionProbe.cs)
 > subscribes to the runtime's contention keyword during a short capture burst, which is the only
 > way to get wait *durations* rather than a contention count. It is deliberate and must stay.
 
@@ -169,9 +169,9 @@ private void DetectTelemetrySystems(ServiceConfigurationContext context)
 
 ---
 
-## Integration with Optimizely.Performance.DotNetCounters
+## Integration with Reignite.Optimizely.DotNetCounters
 
-`Optimizely.Performance.DotNetCounters` does the **same thing** for System.Runtime counters:
+`Reignite.Optimizely.DotNetCounters` does the **same thing** for System.Runtime counters:
 
 ```csharp
 // What DotNetCounters SHOULD do (but currently doesn't):
@@ -195,7 +195,7 @@ builder.Services.ConfigureTelemetryModule<EventCounterCollectionModule>(
 ### Installation
 
 ```bash
-dotnet add package Optimizely.Performance.Counters.CMS
+dotnet add package Reignite.Optimizely.Counters.CMS
 ```
 
 ### Startup Logs

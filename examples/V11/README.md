@@ -1,8 +1,8 @@
 # Optimizely CMS 11 (.NET Framework 4.7.2)
 
 ```
-Install-Package Optimizely.Performance.Counters.CMS
-Install-Package Optimizely.Performance.Counters.Commerce   # Commerce 13 sites only
+Install-Package Reignite.Optimizely.Counters.CMS
+Install-Package Reignite.Optimizely.Counters.Commerce   # Commerce 13 sites only
 ```
 
 `CMSPerformanceCountersModule` is an `[InitializableModule]`, so Optimizely finds it without any
@@ -26,7 +26,7 @@ One of the four probes runs here: the thread pool queue delay probe, which publi
 that .NET Framework does not have, and the cache lock probe has nothing to find for the same reason
 the cascade counters are absent - so the four `Optimizely.CMS.Cache.Lock*` counters stay at zero
 too. On V11 the ground those three cover is the ground Windows performance counters already cover,
-which is `Optimizely.Performance.DotNetCounters`' job.
+which is `Reignite.Optimizely.DotNetCounters`' job.
 
 ## Log write rate
 
@@ -130,7 +130,7 @@ When you do want to change something, it comes from `appSettings`, under the sam
 `Optimizely:Instrumentation:*` key paths a V12 or V13 site writes into `appsettings.json` - one set
 of names across all three majors, so what you learn here still applies after an upgrade. The
 complete set, every value at its default, is written to
-`App_Data\Optimizely.Performance.Counters\Optimizely.Instrumentation.template.config` when the
+`App_Data\Reignite.Optimizely.Counters\Optimizely.Instrumentation.template.config` when the
 package is installed. Copy the `<add>` elements you want to change into `web.config` and leave the
 rest out.
 

@@ -2,7 +2,7 @@
 <!--
   Lines to merge into a CMS 11 site's web.config. Not a drop-in file.
 
-  Nothing here is required by Optimizely.Performance.Counters.CMS - the initialization module is
+  Nothing here is required by Reignite.Optimizely.Counters.CMS - the initialization module is
   discovered automatically and runs correctly with none of it. This is the Application Insights
   wiring, plus one optional switch that changes what ADO.NET publishes.
 
@@ -14,7 +14,7 @@
 
   The package does read settings, from Optimizely:Instrumentation:* keys in appSettings, but every
   one of them has a default and none is needed to run. The complete set is written to
-  App_Data\Optimizely.Performance.Counters\Optimizely.Instrumentation.template.config on install;
+  App_Data\Reignite.Optimizely.Counters\Optimizely.Instrumentation.template.config on install;
   copy across only what you want to change. The one worth knowing is in the appSettings block
   below, commented out.
 

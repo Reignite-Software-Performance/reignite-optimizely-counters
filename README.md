@@ -1,4 +1,6 @@
-# Optimizely CMS and Commerce Performance Counters
+# Reignite Optimizely CMS and Commerce Performance Counters
+
+> **Reignite Software Performance** builds and maintains this package. It is free to use. If you would rather have someone read the charts with you, or instrument a site that cannot take a package, see [reigniteperformance.com/Optimizely](https://reigniteperformance.com/Optimizely).
 
 Application Insights can tell you that a page took four seconds. It cannot tell you that the page
 made 380 content loads, that 340 of them missed the cache, or that the cart save underneath the
@@ -29,7 +31,7 @@ on a heartbeat, and stamped onto every request the site serves. Comparing a rele
 before it becomes a `summarize` over a dimension rather than an argument about timestamps.
 
 It is the CMS-and-Commerce half of a pair.
-[Optimizely.Performance.DotNetCounters](https://github.com/jeff-fischer-optimizely/Optimizely.Performance.DotNetCounters)
+[Reignite.Optimizely.DotNetCounters](https://github.com/Reignite-Software-Performance/Reignite.Optimizely.DotNetCounters)
 subscribes your APM to the stock .NET, ASP.NET, IIS and OS counters beneath your site — GC, thread
 pool, lock contention, request queue — and is a hard dependency here, so the two always ship
 together. Between them you get the process and the application: *the CLR is fine, your cache hit
@@ -105,11 +107,11 @@ already in your Application Insights bill, and specific to Optimizely's own seam
 Install the package for what your site runs. Both may be installed side by side on a Commerce site.
 
 ```bash
-dotnet add package Optimizely.Performance.Counters.CMS
-dotnet add package Optimizely.Performance.Counters.Commerce
+dotnet add package Reignite.Optimizely.Counters.CMS
+dotnet add package Reignite.Optimizely.Counters.Commerce
 ```
 
-`Optimizely.Performance.Counters.Core` and `Optimizely.Performance.DotNetCounters` come in
+`Reignite.Optimizely.Counters.Core` and `Reignite.Optimizely.DotNetCounters` come in
 transitively; there is no reason to reference either directly.
 
 ### Supported configurations
@@ -127,7 +129,7 @@ loaded into matches.
 These are minimums, not pins — a site ahead of them installs the same package. They are set as low
 as each major allows, on the grounds that a site which has drifted behind is exactly the one most
 likely to want performance counters. Only the V12 CMS minimum is higher than we would like: 12.10.0
-is inherited from `Optimizely.Performance.DotNetCounters`, which these packages always ship beside.
+is inherited from `Reignite.Optimizely.DotNetCounters`, which these packages always ship beside.
 The reasoning behind each number is recorded in [Directory.Build.props](Directory.Build.props).
 
 V12 on .NET 8 and .NET 9 is supported — those are ordinary V12 builds, not V13 builds. The only
@@ -136,7 +138,7 @@ that fails loudly at startup rather than misbehaving quietly.
 
 > **NU1608 on restore is expected and harmless.** Commerce names `EPiServer.CMS.Core` as a range and
 > its sibling `EPiServer.CMS.AspNet(Core)` pins that range's floor exactly, so NuGet lifts
-> `CMS.Core` past the pin to reach the minimum `Optimizely.Performance.DotNetCounters` asks for. A
+> `CMS.Core` past the pin to reach the minimum `Reignite.Optimizely.DotNetCounters` asks for. A
 > site already running a current CMS lifts `AspNet(Core)` to match through its own reference, so
 > this shows up on a bare test project rather than in production. See the note in
 > [Directory.Build.props](Directory.Build.props).
@@ -252,7 +254,7 @@ as installed, so the rest of this section is only needed when you want to change
 Settings live under `Optimizely:Instrumentation`, using the same key paths on all three majors —
 `appSettings` in `web.config` on V11, `appsettings.json` on V12 and V13 — so what a site configures
 survives an upgrade. A template listing every key at its default is packed with the package and
-written to `App_Data\Optimizely.Performance.Counters\` on install; copy across the lines you are
+written to `App_Data\Reignite.Optimizely.Counters\` on install; copy across the lines you are
 changing and leave the rest out.
 
 ```json
@@ -674,7 +676,7 @@ logged as a warning and the site starts anyway — the rate counters are unaffec
 cascade counters go missing.
 
 Nothing in the library listens to its own EventSource, and it does not republish the counters that
-`Optimizely.Performance.DotNetCounters` collects. Collection is entirely the host's business.
+`Reignite.Optimizely.DotNetCounters` collects. Collection is entirely the host's business.
 
 **Overhead.** Timing is allocation-free: `OperationTimer` is a `readonly struct` over a single
 `Stopwatch.GetTimestamp()`, and the decorators forward through explicit try/catch blocks rather
@@ -699,7 +701,7 @@ least afford it.
 
 ### Startup log
 
-Set `Optimizely.Performance.Counters.CMS.Initialization` and
+Set `Reignite.Optimizely.Counters.CMS.Initialization` and
 `...Commerce.Initialization` to `Information`:
 
 ```
@@ -1421,9 +1423,15 @@ does not exist:
 
 ## Related packages
 
-- [Optimizely.Performance.DotNetCounters](https://github.com/jeff-fischer-optimizely/Optimizely.Performance.DotNetCounters)
+- [Reignite.Optimizely.DotNetCounters](https://github.com/Reignite-Software-Performance/Reignite.Optimizely.DotNetCounters)
   — .NET runtime and ASP.NET counters. Required, and installed transitively.
 
 ## License
 
-Apache-2.0
+Apache-2.0 — see [LICENSE](LICENSE) and [NOTICE](NOTICE). Copyright (c) Reignite Software Performance.
+
+## Support
+
+- Issues and feature requests: https://github.com/Reignite-Software-Performance/Reignite.Optimizely.Counters/issues
+- Interpreting the counters, or Optimizely performance work: https://reigniteperformance.com/Optimizely
+- Contact: https://reigniteperformance.com/contact

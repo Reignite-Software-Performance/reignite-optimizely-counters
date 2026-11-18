@@ -1,4 +1,4 @@
-# Optimizely.Performance.Counters - after installation
+# Reignite.Optimizely.Counters - after installation
 
 This folder was created by the package on your first build. It holds a settings template and this
 file. Neither is read by the running site: the site reads its settings from `appsettings.json`
@@ -25,7 +25,7 @@ anything absent keeps its default, so a `web.config` or `appsettings.json` carry
 perfectly good configuration.
 
 For CMS 12 and CMS 13, if `appsettings.json` already has an `Optimizely` block - it usually does,
-and `Optimizely.Performance.DotNetCounters` adds one - put `Instrumentation` inside the existing
+and `Reignite.Optimizely.DotNetCounters` adds one - put `Instrumentation` inside the existing
 block rather than adding a second `Optimizely` key. JSON keeps the last of two duplicate keys and
 the first one's contents are silently lost.
 
@@ -78,7 +78,7 @@ an operator who suspects this package during an incident can rule it out with a 
 recycle rather than a deployment.
 
 This is separate from `Optimizely:PerformanceCounters`, which belongs to
-`Optimizely.Performance.DotNetCounters` and controls the stock .NET, IIS and OS counters. The two
+`Reignite.Optimizely.DotNetCounters` and controls the stock .NET, IIS and OS counters. The two
 packages are usually installed together and are configured independently; switching one off leaves
 the other running.
 
@@ -92,3 +92,20 @@ the next build. To stop it for good, add this to your project file:
   <OptimizelyInstrumentationCopyTemplate>false</OptimizelyInstrumentationCopyTemplate>
 </PropertyGroup>
 ```
+
+---
+
+## About this package
+
+**Reignite.Optimizely.Counters** is built and maintained by **Reignite Software Performance**. It is
+free to use under the Apache License 2.0, and it has no telemetry of its own — it publishes counters
+into the telemetry you already have.
+
+If you would rather have someone read the charts with you, or instrument a site that cannot take a
+package, that is what we do:
+
+- https://reigniteperformance.com/Optimizely
+- https://reigniteperformance.com/contact
+
+Source, issues and release notes:
+https://github.com/Reignite-Software-Performance/Reignite.Optimizely.Counters

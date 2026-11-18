@@ -8,7 +8,7 @@ The OptiCounters project uses the **Decorator Pattern** to intercept Optimizely 
 
 ## Package Structure
 
-### 1. **Optimizely.Performance.Counters.Core**
+### 1. **Reignite.Optimizely.Counters.Core**
 
 **Purpose**: Shared infrastructure used by both CMS and Commerce packages.
 
@@ -26,7 +26,7 @@ The OptiCounters project uses the **Decorator Pattern** to intercept Optimizely 
 
 ---
 
-### 2. **Optimizely.Performance.Counters.CMS**
+### 2. **Reignite.Optimizely.Counters.CMS**
 
 **Purpose**: Performance counters for Optimizely CMS operations.
 
@@ -73,7 +73,7 @@ context.Services.Intercept<IContentLoader>(
 
 ---
 
-### 3. **Optimizely.Performance.Counters.Commerce**
+### 3. **Reignite.Optimizely.Counters.Commerce**
 
 **Purpose**: Performance counters for Optimizely Commerce operations.
 
@@ -372,21 +372,21 @@ context.Services.Intercept<IXXX>(
 
 ```bash
 # For CMS-only projects
-dotnet add package Optimizely.Performance.Counters.CMS
+dotnet add package Reignite.Optimizely.Counters.CMS
 
 # For Commerce projects (includes Core automatically)
-dotnet add package Optimizely.Performance.Counters.Commerce
+dotnet add package Reignite.Optimizely.Counters.Commerce
 
 # For projects with both
-dotnet add package Optimizely.Performance.Counters.CMS
-dotnet add package Optimizely.Performance.Counters.Commerce
+dotnet add package Reignite.Optimizely.Counters.CMS
+dotnet add package Reignite.Optimizely.Counters.Commerce
 ```
 
 ### What Gets Installed
 
 1. Core assembly (shared infrastructure)
 2. CMS or Commerce assembly (decorators)
-3. Optimizely.Performance.DotNetCounters (transitive dependency)
+3. Reignite.Optimizely.DotNetCounters (transitive dependency)
 
 ### Initialization
 

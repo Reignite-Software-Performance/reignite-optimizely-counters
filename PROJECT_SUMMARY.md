@@ -27,7 +27,7 @@ This project provides custom performance counters for Optimizely CMS and Commerc
 
 ### 2. Required Dependency on OptiDotNetCounters
 
-**Decision**: Make Optimizely.Performance.DotNetCounters a **required transitive dependency**.
+**Decision**: Make Reignite.Optimizely.DotNetCounters a **required transitive dependency**.
 
 **Rationale**:
 - User wants both packages installed together
@@ -38,7 +38,7 @@ This project provides custom performance counters for Optimizely CMS and Commerc
 **Implementation**:
 ```xml
 <ItemGroup>
-  <PackageReference Include="Optimizely.Performance.DotNetCounters" Version="1.0.0" />
+  <PackageReference Include="Reignite.Optimizely.DotNetCounters" Version="1.0.0" />
   <!-- Note: NO PrivateAssets - this is transitive -->
 </ItemGroup>
 ```
@@ -84,7 +84,7 @@ if (detected != expected)
 ```
 OptiCounters/
 ├── src/
-│   └── Optimizely.Performance.Counters/
+│   └── Reignite.Optimizely.Counters/
 │       ├── VersionDetection/
 │       │   ├── OptimizelyVersion.cs
 │       │   └── OptimizelyVersionDetector.cs
@@ -111,7 +111,7 @@ OptiCounters/
 │       │   └── ServiceBus/ (TODO)
 │       ├── Initialization/
 │       │   └── PerformanceCountersInitializationModule.cs
-│       └── Optimizely.Performance.Counters.csproj
+│       └── Reignite.Optimizely.Counters.csproj
 ├── examples/
 │   ├── V11/ (TODO)
 │   ├── V12/ (TODO)
@@ -121,7 +121,7 @@ OptiCounters/
 ├── README.md
 ├── NuGet.config
 ├── .gitignore
-└── Optimizely.Performance.Counters.sln
+└── Reignite.Optimizely.Counters.sln
 ```
 
 ## Counter Categories
@@ -312,7 +312,7 @@ Use compilation symbols for version-specific code:
 ## Dependencies
 
 ### Runtime Dependencies
-- Optimizely.Performance.DotNetCounters 1.0.0 (required, transitive)
+- Reignite.Optimizely.DotNetCounters 1.0.0 (required, transitive)
 - Microsoft.ApplicationInsights 2.22.0
 - Microsoft.Extensions.Logging.Abstractions 6.0.0
 - EPiServer.CMS.Core (version-specific, PrivateAssets)
