@@ -20,6 +20,10 @@
 
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" PackagePath="\" Visible="false" />
+    <!-- Packed because the README links to them; a relative link to a file that is not in the
+         package is a broken link on nuget.org, which renders the README from the package root. -->
+    <None Include="$(MSBuildThisFileDirectory)LICENSE" Pack="true" PackagePath="\" Visible="false" />
+    <None Include="$(MSBuildThisFileDirectory)NOTICE" Pack="true" PackagePath="\" Visible="false" />
   </ItemGroup>
 
   <!--
