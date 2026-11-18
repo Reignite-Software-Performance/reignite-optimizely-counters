@@ -1,0 +1,9 @@
+name: reignite-optimizely-counters
+type: library
+language: csharp
+runtime: dotnet
+testing: xunit
+description: Optimizely CMS and Commerce performance counters - content, cache, commerce and runtime probes - published to EventCounters, a Meter and Application Insights.
+defaultBranch: main
+ghOrg: Reignite-Software-Performance
+created: '2026-11-18T16:16:20.276Z'

@@ -1,0 +1,8 @@
+# Automaton test config - .NET library suite.
+# The `command` runner is the generic escape hatch for ecosystems without a
+# first-class runner integration; for .NET it runs `dotnet test`.
+# The solution targets net472, net6.0-net10.0; a host missing one of those
+# runtimes fails that target only, so narrow with -f if it becomes noisy.
+runner: command
+testDir: tests
+script: dotnet test Reignite.Optimizely.Counters.slnx -c Release
