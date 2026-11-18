@@ -57,10 +57,67 @@ namespace Reignite.Optimizely.Counters.CMS.Initialization
         /// the container is being built, before any module initializes.
         /// </summary>
         /// <param name="context">Container configuration context supplied by the framework.</param>
+        /// <remarks>
+        /// On CMS 12 and 13 the work is deferred to <see cref="ServiceConfigurationContext.ConfigurationComplete"/>
+        /// for two reasons, both discovered by running against a real CMS 13 site:
+        /// <para>
+        /// 1. <c>Intercept&lt;IContentLoader&gt;</c> throws <c>InvalidOperationException: There is no
+        /// service registered for EPiServer.IContentLoader</c> when the CMS core services have not
+        /// been registered yet. On CMS 13 they have not been by the time this module's
+        /// ConfigureContainer runs, and the exception takes the site down at startup. Module
+        /// ordering is not something a package can rely on, and ConfigurationComplete is the one
+        /// point that runs after every module has registered while registration is still open.
+        /// </para>
+        /// <para>
+        /// 2. Option loading needs the host's <c>IConfiguration</c>, which
+        /// <see cref="InstrumentationConfiguration.Load"/> finds by looking for a descriptor
+        /// registered as an instance. On CMS 13 that descriptor is not there yet during
+        /// ConfigureContainer either, so every setting - including the master switch - silently
+        /// fell back to its default and `Enabled=false` did not switch the package off.
+        /// </para>
+        /// <para>
+        /// V11 is unaffected and keeps registering here: it configures through
+        /// <c>IServiceConfigurationProvider</c> and reads <c>appSettings</c>, neither of which has
+        /// this ordering problem.
+        /// </para>
+        /// </remarks>
         public void ConfigureContainer(ServiceConfigurationContext context)
         {
             _logger = _deferredLogger = ResolveLogger<CMSPerformanceCountersModule>(context);
 
+#if CMS11
+            Configure(context);
+#else
+            // The captured context, not the event argument: the event exposes
+            // ServiceConfigurationEventArgs, while every helper here takes the
+            // ServiceConfigurationContext (and its IServiceCollection) that the framework
+            // handed to ConfigureContainer. Both point at the same collection.
+            context.ConfigurationComplete += (_, _) => Configure(context);
+#endif
+        }
+
+#if !CMS11
+        /// <summary>
+        /// Test seam: runs the pass <see cref="ConfigureContainer"/> defers to
+        /// <see cref="ServiceConfigurationContext.ConfigurationComplete"/>.
+        /// </summary>
+        /// <param name="context">Container configuration context supplied by the framework.</param>
+        /// <remarks>
+        /// The framework raises that event itself and nothing outside it can, so without this the
+        /// registrations could not be exercised at all and a broken intercept would go unnoticed
+        /// until a site started. Internal: it is not part of the package's surface and no site
+        /// should call it. Production goes through the event.
+        /// </remarks>
+        internal void CompleteConfiguration(ServiceConfigurationContext context) => Configure(context);
+#endif
+
+        /// <summary>
+        /// The actual configuration pass: reads the settings, validates the version and registers
+        /// the tracker, the decorators and the inert-until-Initialize providers.
+        /// </summary>
+        /// <param name="context">Container configuration context supplied by the framework.</param>
+        private void Configure(ServiceConfigurationContext context)
+        {
             _options = LoadOptions(context, _logger);
 
             if (!_options.Enabled)
@@ -117,7 +174,7 @@ namespace Reignite.Optimizely.Counters.CMS.Initialization
 
             if (_options.Cache.Cascade.Enabled)
             {
-                RegisterCascadeInstrumentation(context);
+                InstallCascadeInstrumentation(context);
             }
             else
             {
@@ -287,50 +344,48 @@ namespace Reignite.Optimizely.Counters.CMS.Initialization
         /// </summary>
         /// <remarks>
         /// <para>
-        /// Deferred to <see cref="ServiceConfigurationContext.ConfigurationComplete"/> because
-        /// <see cref="IMemoryCache"/> belongs to the host, not to us, and nothing guarantees it has
-        /// been registered by the time this module configures. ConfigurationComplete runs once
-        /// everything else has registered and registration is still open there, so it is the one
-        /// point that cannot depend on module ordering.
+        /// Runs inline rather than from a second <see cref="ServiceConfigurationContext.ConfigurationComplete"/>
+        /// handler. <see cref="Configure"/> is already executing inside that event, and a handler
+        /// subscribed while the event is being raised never runs - the multicast delegate has
+        /// already been snapshotted. Subscribing a second time is therefore a silent way to
+        /// install nothing, which is exactly the kind of failure this package refuses to have.
         /// </para>
         /// <para>
         /// The recorder is registered after the interception rather than before it, so that a
         /// failure to decorate leaves no recorder in the container at all. That is what makes the
-        /// optional resolution above meaningful rather than merely defensive.
+        /// optional resolution in <see cref="CascadeRecorder"/> meaningful rather than merely
+        /// defensive.
         /// </para>
         /// </remarks>
-        private void RegisterCascadeInstrumentation(ServiceConfigurationContext context)
+        private void InstallCascadeInstrumentation(ServiceConfigurationContext context)
         {
-            context.ConfigurationComplete += (_, e) =>
+            try
             {
-                try
-                {
-                    e.Services.Intercept<IMemoryCache>(
-                        (services, defaultImplementation) => new InstrumentedMemoryCache(
-                            defaultImplementation,
-                            Resolve<CacheCascadeRecorder>(services)));
+                context.Services.Intercept<IMemoryCache>(
+                    (services, defaultImplementation) => new InstrumentedMemoryCache(
+                        defaultImplementation,
+                        Resolve<CacheCascadeRecorder>(services)));
 
-                    var cascadeOptions = _options.Cache.Cascade;
+                var cascadeOptions = _options.Cache.Cascade;
 
-                    e.Services.AddSingleton(services => new CacheCascadeRecorder(
-                        Resolve<IMetricTracker>(services),
-                        cascadeOptions,
-                        services.GetService<ILogger<CacheCascadeRecorder>>()));
+                context.Services.AddSingleton(services => new CacheCascadeRecorder(
+                    Resolve<IMetricTracker>(services),
+                    cascadeOptions,
+                    services.GetService<ILogger<CacheCascadeRecorder>>()));
 
-                    _logger?.LogInformation(
-                        "Cache dependency cascade instrumentation installed on IMemoryCache.");
-                }
-                catch (Exception ex)
-                {
-                    // A site with no cascade counters is a nuisance; a site that will not start is
-                    // an outage. The rate counters are unaffected.
-                    _logger?.LogWarning(
-                        ex,
-                        "Could not decorate IMemoryCache, so cache dependency cascades will not be " +
-                        "measured. Cache hit rate, invalidation rate and the cache lock counters are " +
-                        "unaffected, and cache behaviour is unchanged.");
-                }
-            };
+                _logger?.LogInformation(
+                    "Cache dependency cascade instrumentation installed on IMemoryCache.");
+            }
+            catch (Exception ex)
+            {
+                // A site with no cascade counters is a nuisance; a site that will not start is
+                // an outage. The rate counters are unaffected.
+                _logger?.LogWarning(
+                    ex,
+                    "Could not decorate IMemoryCache, so cache dependency cascades will not be " +
+                    "measured. Cache hit rate, invalidation rate and the cache lock counters are " +
+                    "unaffected, and cache behaviour is unchanged.");
+            }
         }
 #endif
     }

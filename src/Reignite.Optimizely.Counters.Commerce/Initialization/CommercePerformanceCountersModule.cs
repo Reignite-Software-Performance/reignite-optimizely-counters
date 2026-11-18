@@ -48,10 +48,52 @@ namespace Reignite.Optimizely.Counters.Commerce.Initialization
         /// the container is being built, before any module initializes.
         /// </summary>
         /// <param name="context">Container configuration context supplied by the framework.</param>
+        /// <remarks>
+        /// Deferred to <see cref="ServiceConfigurationContext.ConfigurationComplete"/> on CMS 12 and
+        /// 13 for the same two reasons as the CMS module: the Commerce and CMS core services are not
+        /// registered yet during ConfigureContainer on CMS 13, so <c>Intercept&lt;T&gt;</c> throws and
+        /// takes the site down; and the host's <c>IConfiguration</c> is not findable yet, so every
+        /// setting including the master switch silently fell back to its default. V11 keeps
+        /// registering here - it configures through <c>IServiceConfigurationProvider</c> and reads
+        /// <c>appSettings</c>, neither of which has the ordering problem.
+        /// </remarks>
         public void ConfigureContainer(ServiceConfigurationContext context)
         {
             _logger = _deferredLogger = ResolveLogger<CommercePerformanceCountersModule>(context);
 
+#if CMS11
+            Configure(context);
+#else
+            // The captured context, not the event argument: the event exposes
+            // ServiceConfigurationEventArgs, while every helper here takes the
+            // ServiceConfigurationContext (and its IServiceCollection) that the framework
+            // handed to ConfigureContainer. Both point at the same collection.
+            context.ConfigurationComplete += (_, _) => Configure(context);
+#endif
+        }
+
+#if !CMS11
+        /// <summary>
+        /// Test seam: runs the pass <see cref="ConfigureContainer"/> defers to
+        /// <see cref="ServiceConfigurationContext.ConfigurationComplete"/>.
+        /// </summary>
+        /// <param name="context">Container configuration context supplied by the framework.</param>
+        /// <remarks>
+        /// The framework raises that event itself and nothing outside it can, so without this the
+        /// registrations could not be exercised at all and a broken intercept would go unnoticed
+        /// until a site started. Internal: it is not part of the package's surface and no site
+        /// should call it. Production goes through the event.
+        /// </remarks>
+        internal void CompleteConfiguration(ServiceConfigurationContext context) => Configure(context);
+#endif
+
+        /// <summary>
+        /// The actual configuration pass: reads the settings, validates the version and registers
+        /// the tracker, the decorators and the inert-until-Initialize providers.
+        /// </summary>
+        /// <param name="context">Container configuration context supplied by the framework.</param>
+        private void Configure(ServiceConfigurationContext context)
+        {
             _options = LoadOptions(context, _logger);
 
             if (!_options.Enabled)

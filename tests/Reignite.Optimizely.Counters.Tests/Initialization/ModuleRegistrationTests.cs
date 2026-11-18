@@ -26,14 +26,24 @@ namespace Reignite.Optimizely.Counters.Tests.Initialization
         private static ContainerHarness ConfiguredForCms()
         {
             var harness = ContainerHarness.WithOptimizelyServicesRegistered();
-            new CMSPerformanceCountersModule().ConfigureContainer(harness.Context);
+            var module = new CMSPerformanceCountersModule();
+            module.ConfigureContainer(harness.Context);
+#if !CMS11
+            // The module registers its decorators from ConfigurationComplete, which the framework
+            // raises and tests cannot. This is the seam that runs the same pass.
+            module.CompleteConfiguration(harness.Context);
+#endif
             return harness;
         }
 
         private static ContainerHarness ConfiguredForCommerce()
         {
             var harness = ContainerHarness.WithOptimizelyServicesRegistered();
-            new CommercePerformanceCountersModule().ConfigureContainer(harness.Context);
+            var module = new CommercePerformanceCountersModule();
+            module.ConfigureContainer(harness.Context);
+#if !CMS11
+            module.CompleteConfiguration(harness.Context);
+#endif
             return harness;
         }
 
@@ -122,8 +132,14 @@ namespace Reignite.Optimizely.Counters.Tests.Initialization
             // from throwing.
             var harness = ContainerHarness.WithOptimizelyServicesRegistered();
 
-            new CMSPerformanceCountersModule().ConfigureContainer(harness.Context);
-            new CommercePerformanceCountersModule().ConfigureContainer(harness.Context);
+            var cms = new CMSPerformanceCountersModule();
+            var commerce = new CommercePerformanceCountersModule();
+            cms.ConfigureContainer(harness.Context);
+            commerce.ConfigureContainer(harness.Context);
+#if !CMS11
+            cms.CompleteConfiguration(harness.Context);
+            commerce.CompleteConfiguration(harness.Context);
+#endif
 
             Assert.IsType<InstrumentedContentLoader>(harness.Resolve<IContentLoader>());
             Assert.IsType<InstrumentedOrderRepository>(harness.Resolve<IOrderRepository>());

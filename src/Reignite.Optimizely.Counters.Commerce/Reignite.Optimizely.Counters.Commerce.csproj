@@ -66,5 +66,15 @@
     <PackageReference Include="EPiServer.Commerce.Core" Version="$(CommerceV15Version)" PrivateAssets="compile" />
     <PackageReference Include="EPiServer.Framework" Version="$(OptimizelyV13Version)" PrivateAssets="compile" />
   </ItemGroup>
+  <!--
+    The registration pass is deferred to ConfigurationComplete, an event the framework raises and
+    outside code cannot. The seam that lets the tests drive it is internal, so the test assembly
+    needs to see it.
+  -->
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>Reignite.Optimizely.Counters.Tests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
 
 </Project>
