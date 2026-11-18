@@ -108,4 +108,4 @@ package, that is what we do:
 - https://reigniteperformance.com/contact
 
 Source, issues and release notes:
-https://github.com/Reignite-Software-Performance/Reignite.Optimizely.Counters
+https://github.com/Reignite-Software-Performance/reignite-optimizely-counters

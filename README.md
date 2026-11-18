@@ -31,7 +31,7 @@ on a heartbeat, and stamped onto every request the site serves. Comparing a rele
 before it becomes a `summarize` over a dimension rather than an argument about timestamps.
 
 It is the CMS-and-Commerce half of a pair.
-[Reignite.Optimizely.DotNetCounters](https://github.com/Reignite-Software-Performance/Reignite.Optimizely.DotNetCounters)
+[Reignite.Optimizely.DotNetCounters](https://github.com/Reignite-Software-Performance/reignite-optimizely-dotnetcounters)
 subscribes your APM to the stock .NET, ASP.NET, IIS and OS counters beneath your site — GC, thread
 pool, lock contention, request queue — and is a hard dependency here, so the two always ship
 together. Between them you get the process and the application: *the CLR is fine, your cache hit
@@ -1423,7 +1423,7 @@ does not exist:
 
 ## Related packages
 
-- [Reignite.Optimizely.DotNetCounters](https://github.com/Reignite-Software-Performance/Reignite.Optimizely.DotNetCounters)
+- [Reignite.Optimizely.DotNetCounters](https://github.com/Reignite-Software-Performance/reignite-optimizely-dotnetcounters)
   — .NET runtime and ASP.NET counters. Required, and installed transitively.
 
 ## License
@@ -1432,6 +1432,6 @@ Apache-2.0 — see [LICENSE](LICENSE) and [NOTICE](NOTICE). Copyright (c) Reigni
 
 ## Support
 
-- Issues and feature requests: https://github.com/Reignite-Software-Performance/Reignite.Optimizely.Counters/issues
+- Issues and feature requests: https://github.com/Reignite-Software-Performance/reignite-optimizely-counters/issues
 - Interpreting the counters, or Optimizely performance work: https://reigniteperformance.com/Optimizely
 - Contact: https://reigniteperformance.com/contact

@@ -12,7 +12,7 @@
     <Version>1.0.0</Version>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <PackageProjectUrl>https://reigniteperformance.com/Optimizely</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Reignite-Software-Performance/Reignite.Optimizely.Counters</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Reignite-Software-Performance/reignite-optimizely-counters</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>optimizely episerver performance counters monitoring application-insights telemetry reignite</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
