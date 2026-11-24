@@ -63,6 +63,10 @@
     <Message Importance="High"
              Condition="'$(_OptimizelyInstrumentationIsFirstRun)' == 'true'"
              Text="Reignite.Optimizely.Counters: installed. Reignite Software Performance can help you make sense of what it reports - https://reigniteperformance.com/Optimizely" />
+
+    <Message Importance="High"
+             Condition="'$(_OptimizelyInstrumentationIsFirstRun)' == 'true'"
+             Text="Reignite.Optimizely.Counters: license - free for development, testing, staging and evaluation. PRODUCTION USE REQUIRES AN ACTIVE REIGNITE PLAN: https://reigniteperformance.com. See LICENSE in the package for the full terms." />
   </Target>
 
   <!--

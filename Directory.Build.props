@@ -8,9 +8,17 @@
   <PropertyGroup>
     <Authors>Reignite Software Performance</Authors>
     <Company>Reignite Software Performance</Company>
-    <Copyright>Copyright (c) Reignite Software Performance</Copyright>
-    <Version>1.0.0</Version>
-    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <Copyright>Copyright (c) Reignite Software Performance. All rights reserved.</Copyright>
+    <Version>1.1.0</Version>
+    <!--
+      A custom license file, not an SPDX expression: the Reignite Source-Available License allows
+      free development, test, staging and evaluation use but requires an active Reignite plan for
+      production. PackageLicenseFile and PackageLicenseExpression are mutually exclusive. The file
+      is packed below so nuget.org renders it; PackageRequireLicenseAcceptance makes Visual Studio
+      show the acceptance dialog when the package is installed.
+    -->
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageProjectUrl>https://reigniteperformance.com/Optimizely</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Reignite-Software-Performance/reignite-optimizely-counters</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
