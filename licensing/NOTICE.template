@@ -1,0 +1,35 @@
+<PACKAGE OR PRODUCT NAME>
+Copyright (c) Reignite Software Performance
+<PRODUCT URL>
+
+This release is distributed under the Reignite Source-Available License 1.0
+(see LICENSE). Development, testing, staging, and evaluation are free.
+PRODUCTION USE REQUIRES AN ACTIVE REIGNITE PLAN:
+https://reigniteperformance.com
+
+<IF THE CODE DERIVES FROM AN APACHE-2.0 OR OTHER THIRD-PARTY WORK, RECORD IT HERE:>
+This product includes software derived from <UPSTREAM PROJECT NAME>
+(<UPSTREAM URL>), which was published under the Apache License, Version 2.0.
+Reignite owns the copyright in that original work and in this derivative. The
+original attribution notices are retained below.
+
+<UPSTREAM ATTRIBUTION BLOCK:>
+  <UPSTREAM PROJECT NAME>
+  Copyright (c) <UPSTREAM COPYRIGHT HOLDER>
+  Licensed under the Apache License, Version 2.0
+  http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the Apache License, Version 2.0 is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+  or implied. See the Apache License, Version 2.0 for the specific language
+  governing permissions and limitations under that license.
+
+Releases previously published under the Apache License, Version 2.0 remain
+available under that license to anyone who received them. This release is not
+distributed under Apache-2.0.
+
+<Trademark disclaimer:>
+<THIRD-PARTY PRODUCT> and its marks are trademarks of <OWNER>. This package is
+an independent product of Reignite Software Performance and is not published,
+sponsored or endorsed by <OWNER>.

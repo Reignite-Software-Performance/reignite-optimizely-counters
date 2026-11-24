@@ -358,4 +358,6 @@ dotnet test
 
 ## License
 
-Apache-2.0
+Distributed under the Reignite Source-Available License 1.0 — see LICENSE. Free for development,
+testing, staging and evaluation; production use requires an active Reignite plan. Copyright (c)
+Reignite Software Performance. All rights reserved.
