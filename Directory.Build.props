@@ -92,7 +92,7 @@
     <CommerceV13Version>13.0.0</CommerceV13Version>
 
     <!-- V12: CMS 12 / Commerce 14, net6.0-net9.0.
-         12.10.0 is a hard floor and not our choice: Reignite.Optimizely.DotNetCounters 1.0.0 -
+         12.10.0 is a hard floor and not our choice: Reignite.Optimizely.DotNetCounters 1.1.0 -
          the dependency these packages always ship beside - declares EPiServer.CMS.Core and
          EPiServer.Framework >= 12.10.0 in its net6.0 group, which every consumer inherits through
          Core. 12.5.0 restores as an NU1605 downgrade and 12.0.3 as an NU1107 conflict, but only

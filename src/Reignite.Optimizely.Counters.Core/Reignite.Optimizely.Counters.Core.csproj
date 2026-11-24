@@ -39,11 +39,11 @@
       ignores unrecognised keys, which is the one thing a settings file most needs to be told about.
     -->
     <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="$(ExtensionsVersion)" />
-    <PackageReference Include="Reignite.Optimizely.DotNetCounters" Version="1.0.0" />
+    <PackageReference Include="Reignite.Optimizely.DotNetCounters" Version="1.1.0" />
   </ItemGroup>
 
   <!--
-    net10.0 only, and none of it used by this assembly. Reignite.Optimizely.DotNetCounters 1.0.0
+    net10.0 only, and none of it used by this assembly. Reignite.Optimizely.DotNetCounters 1.1.0
     carries a downgrade inside its own graph on this target framework: it names the Microsoft.Extensions
     packages at 10.0.0 directly, while the EPiServer.CMS.Core 13.0.0 it also depends on requires 10.0.2.
     Nearest-wins picks 10.0.0, and NU1605 is an error, so Core cannot restore in Release at all -
