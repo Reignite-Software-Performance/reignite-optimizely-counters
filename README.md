@@ -1,6 +1,10 @@
 # Reignite Optimizely CMS and Commerce Performance Counters
 
-> **Reignite Software Performance** builds and maintains this package. It is free to use. If you would rather have someone read the charts with you, or instrument a site that cannot take a package, see [reigniteperformance.com/Optimizely](https://reigniteperformance.com/Optimizely).
+> **Reignite Software Performance** builds and maintains this package.
+>
+> **Free for development, testing, staging, and evaluation. Production use requires an active Reignite plan** — see [Licensing](#licensing).
+>
+> If you would rather have someone read the charts with you, or instrument a site that cannot take a package, see [reigniteperformance.com/Optimizely](https://reigniteperformance.com/Optimizely).
 
 Application Insights can tell you that a page took four seconds. It cannot tell you that the page
 made 380 content loads, that 340 of them missed the cache, or that the cart save underneath the
@@ -1426,9 +1430,24 @@ does not exist:
 - [Reignite.Optimizely.DotNetCounters](https://github.com/Reignite-Software-Performance/reignite-optimizely-dotnetcounters)
   — .NET runtime and ASP.NET counters. Required, and installed transitively.
 
-## License
+## Licensing
 
-Apache-2.0 — see [LICENSE](LICENSE) and [NOTICE](NOTICE). Copyright (c) Reignite Software Performance.
+Releases of this package are distributed under the **Reignite Source-Available License 1.0** — see
+[LICENSE](LICENSE) and [NOTICE](NOTICE). Copyright (c) Reignite Software Performance. All rights
+reserved.
+
+- **Free** for development, local, test, QA, staging, evaluation, and proof-of-concept use.
+- **Production use requires an active Reignite plan.** A Production Environment is any live site,
+  application, or service used by end users, customers, or real business transactions — including
+  one operated on a client's behalf. Get a plan at
+  [reigniteperformance.com](https://reigniteperformance.com) or email
+  [sales@reigniteperformance.com](mailto:sales@reigniteperformance.com).
+- **No standalone redistribution.** The package may be included inside an application you are
+  licensed to run, but not republished as a package of its own.
+
+Releases previously published under Apache-2.0 remain available under Apache-2.0 to anyone who
+received them. This package is an independent product of Reignite Software Performance and is not
+published, sponsored, or endorsed by Optimizely, Inc.
 
 ## Support
 

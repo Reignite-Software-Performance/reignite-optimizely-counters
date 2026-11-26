@@ -38,7 +38,7 @@ This project provides custom performance counters for Optimizely CMS and Commerc
 **Implementation**:
 ```xml
 <ItemGroup>
-  <PackageReference Include="Reignite.Optimizely.DotNetCounters" Version="1.0.0" />
+  <PackageReference Include="Reignite.Optimizely.DotNetCounters" Version="1.1.0" />
   <!-- Note: NO PrivateAssets - this is transitive -->
 </ItemGroup>
 ```
@@ -312,7 +312,7 @@ Use compilation symbols for version-specific code:
 ## Dependencies
 
 ### Runtime Dependencies
-- Reignite.Optimizely.DotNetCounters 1.0.0 (required, transitive)
+- Reignite.Optimizely.DotNetCounters 1.1.0 (required, transitive)
 - Microsoft.ApplicationInsights 2.22.0
 - Microsoft.Extensions.Logging.Abstractions 6.0.0
 - EPiServer.CMS.Core (version-specific, PrivateAssets)
@@ -358,4 +358,6 @@ dotnet test
 
 ## License
 
-Apache-2.0
+Distributed under the Reignite Source-Available License 1.0 — see LICENSE. Free for development,
+testing, staging and evaluation; production use requires an active Reignite plan. Copyright (c)
+Reignite Software Performance. All rights reserved.

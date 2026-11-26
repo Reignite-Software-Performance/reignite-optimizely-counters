@@ -1,0 +1,23 @@
+<!--
+  Reignite NuGet licensing properties.
+
+  Paste this PropertyGroup into the repo's Directory.Build.props (or into each
+  .csproj if the repo has none), and REMOVE any existing
+  <PackageLicenseExpression> element. PackageLicenseFile and
+  PackageLicenseExpression are mutually exclusive, and an SPDX expression cannot
+  express a production-use restriction.
+-->
+<PropertyGroup>
+  <PackageLicenseFile>LICENSE</PackageLicenseFile>
+  <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  <Copyright>Copyright (c) Reignite Software Performance. All rights reserved.</Copyright>
+</PropertyGroup>
+
+<!--
+  Both files must also be packed at the package root. If the repo already packs
+  them, leave that ItemGroup alone; this is only here for a new repo.
+-->
+<ItemGroup>
+  <None Include="$(MSBuildThisFileDirectory)LICENSE" Pack="true" PackagePath="\" Visible="false" />
+  <None Include="$(MSBuildThisFileDirectory)NOTICE" Pack="true" PackagePath="\" Visible="false" />
+</ItemGroup>

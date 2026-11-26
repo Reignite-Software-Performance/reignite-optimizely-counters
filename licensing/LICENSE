@@ -1,0 +1,111 @@
+REIGNITE SOURCE-AVAILABLE LICENSE
+Version 1.0
+
+Copyright (c) 2025-2026 Reignite Software Performance. All rights reserved.
+https://reigniteperformance.com
+
+This License governs the software, source code, binaries, and accompanying
+documentation that Reignite Software Performance ("Reignite", "we", "us")
+distributes under this License (the "Software"). By downloading, installing,
+building, copying, or using the Software, you ("you", "Licensee") agree to be
+bound by this License. If you do not agree, do not download, install, or use
+the Software.
+
+1. DEFINITIONS
+
+   1.1 "Production Environment" means any environment used to operate a live
+   website, application, or service for end users, customers, or real business
+   transactions; any environment that receives live traffic or processes live
+   business data in the ordinary course of business; and any environment used
+   to provide a service to third parties for a fee or as part of a paid
+   offering. Development, local, test, quality-assurance, staging, evaluation,
+   and proof-of-concept environments are not Production Environments, provided
+   they do not serve live end users or live business operations.
+
+   1.2 "Reignite Plan" means an active, paid subscription or commercial license
+   from Reignite that covers the Software (or the Reignite service of which the
+   Software is a part). Plans are described at https://reigniteperformance.com;
+   contact sales@reigniteperformance.com.
+
+2. GRANT FOR NON-PRODUCTION USE
+
+   Subject to this License, Reignite grants you a worldwide, royalty-free,
+   non-exclusive, non-transferable, revocable license to view, download, build,
+   run, copy, and modify the Software, and to use it solely in non-Production
+   Environments, at no charge.
+
+3. PRODUCTION USE REQUIRES A REIGNITE PLAN
+
+   You may not use the Software in a Production Environment, or deploy it as
+   part of any product or service offered to third parties, unless you, or the
+   organization on whose behalf you deploy it, hold an active Reignite Plan
+   covering the Software. Production use without an active Reignite Plan is not
+   licensed under this License and is a material breach. If you are an agency,
+   systems integrator, or partner, a Reignite Plan must cover each Production
+   Environment into which you deploy the Software.
+
+4. RESTRICTIONS ON REDISTRIBUTION
+
+   You may not redistribute, sublicense, publish, sell, or otherwise make the
+   Software available to any third party as a standalone package, library, SDK,
+   or product, whether modified or unmodified, without Reignite's prior written
+   permission. You may include the Software as an internal component of an
+   application that you are licensed to operate in a Production Environment
+   under Section 3, provided that you do not expose the Software's programming
+   interface for use by third parties and you retain all notices required by
+   Section 5.
+
+5. NOTICES AND ATTRIBUTION
+
+   You must retain this License, the NOTICE file distributed with the Software,
+   and all copyright, attribution, and trademark notices in the Software and in
+   any copy or modification. You may not remove or obscure them.
+
+6. TRADEMARKS
+
+   This License does not grant permission to use the trade names, trademarks,
+   service marks, or product names of Reignite, except as necessary for
+   reasonable and customary use in describing the origin of the Software.
+
+7. TERMINATION
+
+   This License terminates automatically if you breach it. Upon termination you
+   must cease all use of the Software and destroy all copies in your possession
+   or control. Sections 3, 4, 5, 8, 9, and 10 survive termination. Termination
+   does not relieve you of any obligation to pay for Production use that
+   occurred before termination.
+
+8. NO WARRANTY
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE, TITLE, AND NON-INFRINGEMENT. YOU BEAR THE
+   ENTIRE RISK ARISING OUT OF YOUR USE OF THE SOFTWARE.
+
+9. LIMITATION OF LIABILITY
+
+   TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL
+   REIGNITE BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY,
+   OR CONSEQUENTIAL DAMAGES (INCLUDING, WITHOUT LIMITATION, PROCUREMENT OF
+   SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+   INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+   CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+   ARISING IN ANY WAY OUT OF THE USE OF THE SOFTWARE, EVEN IF ADVISED OF THE
+   POSSIBILITY OF SUCH DAMAGE.
+
+10. THIRD-PARTY COMPONENTS AND PRIOR RELEASES
+
+   10.1 The Software may include or be derived from components licensed under
+   other terms, including the Apache License, Version 2.0. Those components
+   remain governed by their own licenses, as recorded in the NOTICE file.
+
+   10.2 Releases of the Software that were previously published under the
+   Apache License, Version 2.0 remain available under that license to anyone
+   who received them. This License applies only to releases that Reignite
+   distributes under this License.
+
+11. CONTACT
+
+   Licensing, production-use, and partnership questions:
+     https://reigniteperformance.com
+     legal@reigniteperformance.com

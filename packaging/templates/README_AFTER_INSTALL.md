@@ -97,9 +97,13 @@ the next build. To stop it for good, add this to your project file:
 
 ## About this package
 
-**Reignite.Optimizely.Counters** is built and maintained by **Reignite Software Performance**. It is
-free to use under the Apache License 2.0, and it has no telemetry of its own — it publishes counters
-into the telemetry you already have.
+**Reignite.Optimizely.Counters** is built and maintained by **Reignite Software Performance**. It
+has no telemetry of its own — it publishes counters into the telemetry you already have.
+
+**License.** Free for development, local, test, QA, staging, evaluation, and proof-of-concept use.
+**Production use requires an active Reignite plan** — a Production Environment is any live site,
+application, or service used by end users, customers, or real business transactions. See `LICENSE`
+in the package for the full terms, or get a plan at https://reigniteperformance.com.
 
 If you would rather have someone read the charts with you, or instrument a site that cannot take a
 package, that is what we do:
