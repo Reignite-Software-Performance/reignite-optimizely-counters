@@ -36,7 +36,15 @@ jobs:
 
       - uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '10.0.x'
+          # The test project targets net472, net6.0, net8.0, net9.0 and net10.0, and this workflow's
+          # `dotnet test` runs them all. Installing only 10.0.x leaves the net6.0 test host without a
+          # runtime and aborts the run (Microsoft.NETCore.App 6.0.0 not found). Match ci.yml's runtime
+          # set; net7.0 is absent because nothing targets it.
+          dotnet-version: |
+            6.0.x
+            8.0.x
+            9.0.x
+            10.0.x
 
       - name: Restore
         run: dotnet restore Reignite.Optimizely.Counters.slnx
