@@ -28,11 +28,10 @@ namespace Reignite.Optimizely.Counters.Tests.Initialization
             var harness = ContainerHarness.WithOptimizelyServicesRegistered();
             var module = new CMSPerformanceCountersModule();
             module.ConfigureContainer(harness.Context);
-#if !CMS11
             // The module registers its decorators from ConfigurationComplete, which the framework
-            // raises and tests cannot. This is the seam that runs the same pass.
+            // raises and tests cannot. This is the seam that runs the same pass; it exists on
+            // every version, V11 included.
             module.CompleteConfiguration(harness.Context);
-#endif
             return harness;
         }
 
@@ -41,9 +40,7 @@ namespace Reignite.Optimizely.Counters.Tests.Initialization
             var harness = ContainerHarness.WithOptimizelyServicesRegistered();
             var module = new CommercePerformanceCountersModule();
             module.ConfigureContainer(harness.Context);
-#if !CMS11
             module.CompleteConfiguration(harness.Context);
-#endif
             return harness;
         }
 
@@ -136,10 +133,8 @@ namespace Reignite.Optimizely.Counters.Tests.Initialization
             var commerce = new CommercePerformanceCountersModule();
             cms.ConfigureContainer(harness.Context);
             commerce.ConfigureContainer(harness.Context);
-#if !CMS11
             cms.CompleteConfiguration(harness.Context);
             commerce.CompleteConfiguration(harness.Context);
-#endif
 
             Assert.IsType<InstrumentedContentLoader>(harness.Resolve<IContentLoader>());
             Assert.IsType<InstrumentedOrderRepository>(harness.Resolve<IOrderRepository>());

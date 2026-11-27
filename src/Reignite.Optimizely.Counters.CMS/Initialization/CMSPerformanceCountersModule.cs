@@ -100,7 +100,6 @@ namespace Reignite.Optimizely.Counters.CMS.Initialization
             context.ConfigurationComplete += (_, _) => Configure(context);
         }
 
-#if !CMS11
         /// <summary>
         /// Test seam: runs the pass <see cref="ConfigureContainer"/> defers to
         /// <see cref="ServiceConfigurationContext.ConfigurationComplete"/>.
@@ -110,10 +109,9 @@ namespace Reignite.Optimizely.Counters.CMS.Initialization
         /// The framework raises that event itself and nothing outside it can, so without this the
         /// registrations could not be exercised at all and a broken intercept would go unnoticed
         /// until a site started. Internal: it is not part of the package's surface and no site
-        /// should call it. Production goes through the event.
+        /// should call it. Production goes through the event on every version.
         /// </remarks>
         internal void CompleteConfiguration(ServiceConfigurationContext context) => Configure(context);
-#endif
 
         /// <summary>
         /// The actual configuration pass: reads the settings, validates the version and registers
