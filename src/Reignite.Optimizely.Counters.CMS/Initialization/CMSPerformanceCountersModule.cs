@@ -76,24 +76,28 @@ namespace Reignite.Optimizely.Counters.CMS.Initialization
         /// fell back to its default and `Enabled=false` did not switch the package off.
         /// </para>
         /// <para>
-        /// V11 is unaffected and keeps registering here: it configures through
-        /// <c>IServiceConfigurationProvider</c> and reads <c>appSettings</c>, neither of which has
-        /// this ordering problem.
+        /// V11 raises the same event, so it now defers too. This used to keep registering inline
+        /// on the theory that V11 configures through <c>IServiceConfigurationProvider</c> and reads
+        /// <c>appSettings</c>, neither of which has the ordering problem. A real CMS 11 host
+        /// disproved it: on a minimal site this module's ConfigureContainer ran before the CMS core
+        /// registered <c>IContentLoader</c>, and <c>Intercept&lt;IContentLoader&gt;</c> threw
+        /// "There is no service registered for EPiServer.IContentLoader" at startup.
         /// </para>
         /// </remarks>
         public void ConfigureContainer(ServiceConfigurationContext context)
         {
             _logger = _deferredLogger = ResolveLogger<CMSPerformanceCountersModule>(context);
 
-#if CMS11
-            Configure(context);
-#else
+            // Defer on every version. CMS 11 raises ConfigurationComplete too (it lives on
+            // EPiServer.ServiceLocation.ServiceConfigurationContext), and deferring is what makes
+            // Intercept<IContentLoader> safe when this module's ConfigureContainer runs before the
+            // CMS core has registered IContentLoader.
+            //
             // The captured context, not the event argument: the event exposes
             // ServiceConfigurationEventArgs, while every helper here takes the
-            // ServiceConfigurationContext (and its IServiceCollection) that the framework
-            // handed to ConfigureContainer. Both point at the same collection.
+            // ServiceConfigurationContext (and its IServiceCollection) that the framework handed to
+            // ConfigureContainer. Both point at the same collection.
             context.ConfigurationComplete += (_, _) => Configure(context);
-#endif
         }
 
 #if !CMS11
@@ -277,14 +281,14 @@ namespace Reignite.Optimizely.Counters.CMS.Initialization
                 (services, defaultImplementation) => new InstrumentedContentLoader(
                     defaultImplementation,
                     Resolve<IMetricTracker>(services),
-                    Resolve<ILogger<InstrumentedContentLoader>>(services)));
+                    DecoratorLogger<InstrumentedContentLoader>(services)));
 
             // Intercept IContentRepository with instrumented decorator
             context.Services.Intercept<IContentRepository>(
                 (services, defaultImplementation) => new InstrumentedContentRepository(
                     defaultImplementation,
                     Resolve<IMetricTracker>(services),
-                    Resolve<ILogger<InstrumentedContentRepository>>(services)));
+                    DecoratorLogger<InstrumentedContentRepository>(services)));
 
             // Intercept ISynchronizedObjectInstanceCache with instrumented decorator. The cascade
             // recorder is resolved optionally: it is only registered once the memory cache one layer
@@ -294,7 +298,7 @@ namespace Reignite.Optimizely.Counters.CMS.Initialization
                 (services, defaultImplementation) => new InstrumentedSynchronizedObjectInstanceCache(
                     defaultImplementation,
                     Resolve<IMetricTracker>(services),
-                    Resolve<ILogger<InstrumentedSynchronizedObjectInstanceCache>>(services),
+                    DecoratorLogger<InstrumentedSynchronizedObjectInstanceCache>(services),
                     CascadeRecorder(services)));
 
 #if CMS13
@@ -303,7 +307,7 @@ namespace Reignite.Optimizely.Counters.CMS.Initialization
                 (services, defaultImplementation) => new InstrumentedEventPublisher(
                     defaultImplementation,
                     Resolve<IMetricTracker>(services),
-                    Resolve<ILogger<InstrumentedEventPublisher>>(services)));
+                    DecoratorLogger<InstrumentedEventPublisher>(services)));
 
             _logger?.LogInformation(
                 "Registered decorators: IContentLoader, IContentRepository, ISynchronizedObjectInstanceCache, IEventPublisher");
