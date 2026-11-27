@@ -459,5 +459,24 @@ namespace Reignite.Optimizely.Counters.Shared
             where T : notnull =>
             services.GetRequiredService<T>();
 #endif
+
+#if CMS11
+        /// <summary>
+        /// The logger a decorator receives. CMS 11 registers no host <c>ILogger&lt;T&gt;</c> (the
+        /// module's own ResolveLogger returns null there), so resolving one for a decorator throws
+        /// during container configuration and takes the site down. NullLogger is the honest value:
+        /// instrumentation must not fail because the host has no logging registration.
+        /// </summary>
+        internal static ILogger<T> DecoratorLogger<T>(IServiceLocator services)
+            => Microsoft.Extensions.Logging.Abstractions.NullLogger<T>.Instance;
+#else
+        /// <summary>
+        /// The logger a decorator receives. V12/V13 register Microsoft.Extensions.Logging, so the
+        /// host's configured logger is resolved normally.
+        /// </summary>
+        internal static ILogger<T> DecoratorLogger<T>(IServiceProvider services)
+            where T : notnull =>
+            services.GetRequiredService<ILogger<T>>();
+#endif
     }
 }
