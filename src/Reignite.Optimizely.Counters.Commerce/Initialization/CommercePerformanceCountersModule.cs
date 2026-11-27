@@ -53,26 +53,18 @@ namespace Reignite.Optimizely.Counters.Commerce.Initialization
         /// 13 for the same two reasons as the CMS module: the Commerce and CMS core services are not
         /// registered yet during ConfigureContainer on CMS 13, so <c>Intercept&lt;T&gt;</c> throws and
         /// takes the site down; and the host's <c>IConfiguration</c> is not findable yet, so every
-        /// setting including the master switch silently fell back to its default. V11 keeps
-        /// registering here - it configures through <c>IServiceConfigurationProvider</c> and reads
-        /// <c>appSettings</c>, neither of which has the ordering problem.
+        /// setting including the master switch silently fell back to its default. V11 raises the
+        /// same ConfigurationComplete event, so it defers too: the CMS 11 harness showed this
+        /// module's ConfigureContainer can run before the CMS core registers IContentLoader, with
+        /// the same "no service registered" startup failure.
         /// </remarks>
         public void ConfigureContainer(ServiceConfigurationContext context)
         {
             _logger = _deferredLogger = ResolveLogger<CommercePerformanceCountersModule>(context);
 
-#if CMS11
-            Configure(context);
-#else
-            // The captured context, not the event argument: the event exposes
-            // ServiceConfigurationEventArgs, while every helper here takes the
-            // ServiceConfigurationContext (and its IServiceCollection) that the framework
-            // handed to ConfigureContainer. Both point at the same collection.
+            // Defer on every version; see CMSPerformanceCountersModule.ConfigureContainer.
             context.ConfigurationComplete += (_, _) => Configure(context);
-#endif
         }
-
-#if !CMS11
         /// <summary>
         /// Test seam: runs the pass <see cref="ConfigureContainer"/> defers to
         /// <see cref="ServiceConfigurationContext.ConfigurationComplete"/>.
@@ -85,7 +77,6 @@ namespace Reignite.Optimizely.Counters.Commerce.Initialization
         /// should call it. Production goes through the event.
         /// </remarks>
         internal void CompleteConfiguration(ServiceConfigurationContext context) => Configure(context);
-#endif
 
         /// <summary>
         /// The actual configuration pass: reads the settings, validates the version and registers
@@ -208,7 +199,7 @@ namespace Reignite.Optimizely.Counters.Commerce.Initialization
                 (services, defaultImplementation) => new InstrumentedOrderRepository(
                     defaultImplementation,
                     Resolve<IMetricTracker>(services),
-                    Resolve<ILogger<InstrumentedOrderRepository>>(services)));
+                    DecoratorLogger<InstrumentedOrderRepository>(services)));
 
             _logger?.LogInformation("Registered decorators: IOrderRepository");
 
